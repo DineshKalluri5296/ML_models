@@ -18,5 +18,5 @@ def read_root():
 @app.post("/predict")
 def predict(data: KyphosisInput):
     input_data = np.array([[data.Number, data.Age, data.Start]])
-    prediction = model.predict(input_data)[0]
+    prediction = model.predict(input_data)
     return {"Kyphosis": bool(prediction)}
