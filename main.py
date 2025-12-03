@@ -7,11 +7,11 @@ app = FastAPI()
 model = joblib.load("USA_Housing.pkl")
 
 class USA_HousingInput(BaseModel):
-   Avg. Area Income =
-   Avg. Area House Age =
-   Avg. Area Number of Rooms =
-   Avg. Area Number of Bedrooms =
-   Area Population =
+   Avg. Area Income = float
+   Avg. Area House Age = float
+   Avg. Area Number of Rooms = float
+   Avg. Area Number of Bedrooms = float
+   Area Population = float
 
 
 @app.get("/")
