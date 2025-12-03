@@ -4,19 +4,22 @@ import joblib
 import numpy as np
 
 app = FastAPI()
-model = joblib.load("kyphosis.pkl")
+model = joblib.load("USA_Housing.pkl")
 
-class KyphosisInput(BaseModel):
-    Number:int
-    Start:int
-    Age: int
+class USA_HousingInput(BaseModel):
+   Avg. Area Income =
+   Avg. Area House Age =
+   Avg. Area Number of Rooms =
+   Avg. Area Number of Bedrooms =
+   Area Population =
+
 
 @app.get("/")
 def read_root():
-    return {"message": "Kyphosis Prediction API is live"}
+    return {"message": "USA_Housing Prediction API is live"}
 
 @app.post("/predict")
-def predict(data: KyphosisInput):
-    input_data = np.array([[data.Number, data.Age, data.Start]])
+def predict(data: USA_HousingsInput):
+    input_data = np.array([[data.Avg. Area Income, data.Avg. Area House Age, data.Avg. Area Number of Rooms, data.Avg. Area Number of BedRooms, data.Area Population]])
     prediction = model.predict(input_data)
-    return {"Kyphosis": bool(prediction)}
+    return {"USA_Housing": bool(prediction)}
