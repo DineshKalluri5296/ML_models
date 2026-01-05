@@ -1,0 +1,57 @@
+import pandas as pd
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.feature_extraction.text import CountVectorizer
+
+
+data={
+    
+      "Text":[
+        "Win a free iPhone now",
+        "Congratulations you won lottery",
+        "Meeting scheduled at 10 AM",
+        "Project update attached",
+        "Claim your free prize now",
+        "Let us discuss the report tomorrow",
+        "Urgent! Your account has been compromised",
+        "Team lunch scheduled for today",
+        "Limited offer buy now",
+        "Please review the attached document"
+    ], 
+    "label":[1,1,0,0,1,0,0,1,0,1]  
+      
+}
+df = pd.DataFrame(data)
+
+X=df["Text"]
+y=df["label"]
+
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
+
+
+vectorizer=CountVectorizer(lowercase=True, stop_words="english")
+
+X_train_vectorize=vectorizer.fit_transform(X_train)
+X_test_vectorize=vectorizer.transform(X_test)
+
+model=MultinomialNB()
+
+model.fit(X_train_vectorize,y_train)
+
+# y_predict=model.predict(X_test_vectorize)
+
+# accuracy=accuracy_score(y_test,y_predict)
+# classificationreport=classification_report(y_test,y_predict)
+
+# print(accuracy)
+# print(classificationreport)
+
+user_text=input("Enter a message to classify: ")
+user_vectorize=vectorizer.transform([user_text])
+prediction=model.predict(user_vectorize)
+
+if prediction[0]==1 :
+  print("Spam mail")
+else:
+  print("Non-Spam mail")
